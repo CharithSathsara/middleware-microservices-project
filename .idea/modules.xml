@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/billing-service/billing-service.iml" filepath="$PROJECT_DIR$/billing-service/billing-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-top-up-service/data-top-up-service.iml" filepath="$PROJECT_DIR$/data-top-up-service/data-top-up-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/microservices-project.iml" filepath="$PROJECT_DIR$/.idea/microservices-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/naming-server/naming-server.iml" filepath="$PROJECT_DIR$/naming-server/naming-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ringtone-personalization-service/ringtone-personalization-service.iml" filepath="$PROJECT_DIR$/ringtone-personalization-service/ringtone-personalization-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-activation-service/service-activation-service.iml" filepath="$PROJECT_DIR$/service-activation-service/service-activation-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server.iml" filepath="$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server.iml" />
+    </modules>
+  </component>
+</project>
