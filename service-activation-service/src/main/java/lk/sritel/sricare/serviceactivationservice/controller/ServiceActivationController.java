@@ -25,6 +25,7 @@ public class ServiceActivationController {
 
     @PostMapping("/roaming/activate/{userId}")
     public ServiceActivationResponse activateRoamingService(@PathVariable String userId) {
+        System.out.println("ROAMING");
         return activationService.activateRoamingService(userId);
     }
 

@@ -27,9 +27,9 @@ public class DataTopUpController {
         return currencyExchange;
     }
 
-    @PostMapping("/user/{userId}/top-up")
-    public DataTopUpResponse topUpData(@PathVariable String userId, @RequestBody DataTopUpRequest dataTopUpRequest) {
-        return dataTopUpService.topUpData(userId, dataTopUpRequest);
+    @PostMapping("/user/{phone}/top-up")
+    public DataTopUpResponse topUpData(@PathVariable String phone, @RequestBody DataTopUpRequest dataTopUpRequest) {
+        return dataTopUpService.topUpData(phone, dataTopUpRequest);
     }
 
 }

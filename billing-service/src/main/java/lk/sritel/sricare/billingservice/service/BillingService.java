@@ -1,5 +1,6 @@
 package lk.sritel.sricare.billingservice.service;
 
+import lk.sritel.sricare.billingservice.BillRequest;
 import lk.sritel.sricare.billingservice.model.Bill;
 import lk.sritel.sricare.billingservice.repository.BillingRepository;
 import lk.sritel.sricare.billingservice.response.BillingResponse;
@@ -16,38 +17,56 @@ public class BillingService {
     @Autowired
     private BillingRepository billingRepository;
 
-//    public BillingResponse getCurrentBill(String userId) {
-//
-//        try {
-////            Bill currentBill = billingRepository.findByUserId(userId);
-//            //In order to generate the current bill, this should interact with data-top-up service and ring-tone-service
-//
-////            if (currentBill != null) {
-////                return new BillingResponse("Current bill retrieved successfully", HttpStatus.OK, currentBill);
-////            } else {
-////                return new BillingResponse("Current bill not found for the user", HttpStatus.NOT_FOUND, null);
-////            }
-//        } catch (Exception e) {
-//            return new BillingResponse("Failed to retrieve current bill", HttpStatus.INTERNAL_SERVER_ERROR, null);
-//        }
-//    }
-
-    public PastBillsResponse getPastBills(String userId) {
+    public BillingResponse getCurrentBill(String userId) {
 
         try {
 
-            List<Bill> pastBills = billingRepository.findByUserId(userId);
+            Bill currentBill = billingRepository.findByUserId(userId);
 
-            if (pastBills != null && !pastBills.isEmpty()) {
-                return new PastBillsResponse("Past bill retrieved successfully", HttpStatus.OK, pastBills);
+            if (currentBill != null) {
+                return new BillingResponse("Current bill retrieved successfully", HttpStatus.OK, currentBill);
             } else {
-                return new PastBillsResponse("No past bills found for the user", HttpStatus.NOT_FOUND, null);
+                return new BillingResponse("Current bill not found for the user", HttpStatus.NOT_FOUND, null);
+            }
+        } catch (Exception e) {
+            return new BillingResponse("Failed to retrieve current bill", HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public BillingResponse createBill(BillRequest billRequest) {
+
+        try {
+            Bill newBill = new Bill();
+            newBill.setUserId(billRequest.getUserId());
+            newBill.setAmount(billRequest.getAmount());
+            newBill.setPaid(false);
+
+            Bill createdBill = billingRepository.save(newBill);
+
+            return new BillingResponse("Bill created successfully", HttpStatus.CREATED, createdBill);
+        } catch (Exception e) {
+            return new BillingResponse("Failed to create the bill", HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    public BillingResponse payBill(String billId) {
+
+        try {
+            Bill billToPay = billingRepository.findById(billId).orElse(null);
+
+            if (billToPay == null) {
+                return new BillingResponse("Bill not found", HttpStatus.NOT_FOUND, null);
             }
 
+            billToPay.setPaid(true);
+            billingRepository.save(billToPay);
+
+            return new BillingResponse("Bill paid successfully", HttpStatus.OK, billToPay);
         } catch (Exception e) {
-            return new PastBillsResponse("Failed to retrieve past bills", HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return new BillingResponse("Failed to pay the bill", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
 
     }
+
 
 }

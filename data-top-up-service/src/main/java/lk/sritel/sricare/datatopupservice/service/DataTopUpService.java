@@ -20,16 +20,14 @@ public class DataTopUpService {
     @Autowired
     private DataTopUpRepository dataTopUpRepository;
 
-    public DataTopUpResponse topUpData(String userId, DataTopUpRequest dataTopUpRequest) {
+    public DataTopUpResponse topUpData(String phone, DataTopUpRequest dataTopUpRequest) {
 
         try {
-            // Perform data top-up logic here
-            // You can validate the data top-up request, update the user's data balance, etc.
 
             // For demonstration purposes, let's assume the data top-up is successful
             DataTopUp dataTopUp = new DataTopUp();
 
-            dataTopUp.setUserId(userId);
+            dataTopUp.setUserId(phone);
             dataTopUp.setTopUpAmount(dataTopUpRequest.getTopUpAmount());
             dataTopUp.setTopUpDate(new Date());
 

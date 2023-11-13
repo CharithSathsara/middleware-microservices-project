@@ -1,5 +1,6 @@
 package lk.sritel.sricare.billingservice.controller;
 
+import lk.sritel.sricare.billingservice.BillRequest;
 import lk.sritel.sricare.billingservice.model.CurrencyConversion;
 import lk.sritel.sricare.billingservice.proxy.DataTopUpProxy;
 import lk.sritel.sricare.billingservice.response.BillingResponse;
@@ -7,10 +8,7 @@ import lk.sritel.sricare.billingservice.response.PastBillsResponse;
 import lk.sritel.sricare.billingservice.service.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
@@ -61,14 +59,19 @@ public class BillingController {
     @Autowired
     private BillingService billingService;
 
-//    @GetMapping("/current-bill/{userId}")
-//    public BillingResponse getCurrentBill(@PathVariable String userId) {
-//        return billingService.getCurrentBill(userId);
-//    }
+    @GetMapping("/current-bill/{userId}")
+    public BillingResponse getCurrentBill(@PathVariable String userId) {
+        return billingService.getCurrentBill(userId);
+    }
 
-    @GetMapping("/past-bills/{userId}")
-    public PastBillsResponse getPastBills(@PathVariable String userId) {
-        return billingService.getPastBills(userId);
+    @PostMapping("/create-bill")
+    public BillingResponse createBill(@RequestBody BillRequest billRequest) {
+        return billingService.createBill(billRequest);
+    }
+
+    @PostMapping("/pay-bill/{billId}")
+    public BillingResponse payBill(@PathVariable String billId) {
+        return billingService.payBill(billId);
     }
 
 }

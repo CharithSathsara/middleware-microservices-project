@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface BillingRepository extends MongoRepository<Bill, String> {
-    List<Bill> findByUserId(String userId);
+    Bill findByUserId(String userId);
 }
